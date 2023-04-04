@@ -1,0 +1,25 @@
+*{
+    box-sizing: border-box;
+}
+
+.img-slide{
+	height: auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+.product_img{
+    max-width: 180px;
+    max-height: 180px;
+}
+.imgnew{
+    max-height: 200px;
+}
+.containerr{
+    min-height: 800px;
+}
+
+.product1{
+    max-width: 215px;
+}

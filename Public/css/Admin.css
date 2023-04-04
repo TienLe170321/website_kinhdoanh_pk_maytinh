@@ -1,0 +1,22 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body{
+	background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    z-index: 0.5;
+}
+.menu{
+	background-color: rgba(255, 255, 255, 0.7);
+}
+.content{
+	min-height: 500px;
+	background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}

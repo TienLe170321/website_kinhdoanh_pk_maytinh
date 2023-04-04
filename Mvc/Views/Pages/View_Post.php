@@ -1,0 +1,61 @@
+<div class="p-1 bg-dark d-flex ">
+	<h3 class="text-white pt-2 mx-2"> <?php echo  $data['title'];?></h3>
+	<form class="d-flex p-2 ms-auto" action="http://localhost/<?php echo link;?>/Post/Search_Post/0" method="post">
+        <input class="form-control rounded-0" type="text" placeholder="Tìm bài viết" name="search-post" required>
+        <button class="btn btn-primary rounded-0" type="button " name="bt-search-post">Tìm</button>
+    </form>
+</div>
+<div class="content p-2 bg-light">
+    <table class="table table-hover table-bordered mt-3 bg-white ">
+        <thead>
+        <tr class="bg-dark text-white">
+            <td>Stt</td>
+            <td>Tiêu đề bài viết</td>
+            <td>Ngày tạo</td>
+            <td>Hình ảnh</td>
+            <td style="max-width: 200px;">Nội dung bài viết</td>
+            <td>Sửa</td>
+            <td>Xóa</td>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+            $i= $data['stt']+1;
+            while ($row = mysqli_fetch_row($data["DS_BV"])) {
+        ?>
+        <tr >
+            <td><?php echo $i; ?></td>
+            <td style="max-width: 150px;" ><?php echo substr($row[1],0,50).' ...' ?></td>
+            <td><?php echo $row[4] ?></td>
+            <td style="max-width: 100px;"> <img class="img-thumbnail w-75 mx-auto d-block" alt="Cinque Terre" src="http://localhost/<?php echo link;?>/Public/Image/<?php echo $row[3] ?>"> </td>
+            <td style="max-width: 250px;"><?php echo substr($row[2],0,50).' ...' ?></td>
+            <td><a class="nav-link" href="http://localhost/<?php echo link;?>/Post/Update_Post/<?php echo $row[0] ?>">Sửa</a></td>
+            <td><a class="nav-link" href="http://localhost/<?php echo link;?>/Post/Delete_Post/<?php echo $row[0] ?>">Xóa</a></td>
+        </tr>
+        <?php
+            $i++;
+            }
+        ?>
+        </tbody>
+    </table>
+</div>
+<div class="bg-white p-2 d-flex justify-content-between">
+    <ul class="pagination my-auto">
+        <?php
+            $t = $data["SL"];//so luong tai khoan
+            $a = 1;//thu tu trang 
+            for ($i = 0; $i < $t; $i=$i+10) { //$i = Limit $i,10 
+        ?>
+        <li class="page-item">
+            <a class="page-link bg-dark text-white" href="http://localhost/<?php echo link;?>/<?php echo  $data['link'],$i;?>"><?php echo $a; ?></a>
+        </li>
+        <?php
+                $a++;
+            }
+            unset($data);
+        ?>
+    </ul>
+    <div class="p-2 bg-dark">
+        <a href="http://localhost/<?php echo link;?>/Post/Add_Post/" class="text-white nav-link ">Thêm bài viết</a>
+    </div>
+</div>
