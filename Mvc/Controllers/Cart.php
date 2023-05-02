@@ -48,9 +48,7 @@
 				}else{
 					$ser->Alert('Mã đã hết hạn hoặc không đúng');
 					$this->Show();
-				}
-				
-				
+				}	
 			}
 		}
 		//Tao Hoa Don
@@ -59,12 +57,20 @@
 			$customer = $this->Model('Model_Customer');
 			$bill = $this->Model('Model_Bill');
 			if (isset($_POST['submit-bill'])) {
-				if ($_SESSION['list_gear_cart']!=null) {
+				if(isset($_SESSION['list_gear_cart'])){
+
+
 					$name_cus = $_POST['hoten'];
 					$phone_cus = $_POST['sdt'];
 					$adress_cus = $_POST['diachi'];
 					$email = "";
 					$acc = $_SESSION['user']['id'];
+					$day = $ser->ToDay();
+					$cost_bill = $_POST['tongtien'];
+					$code_id = NULL;
+					$staff_id = NULL;
+
+
 					//Tìm tt khách hàng
 					$kq_customer_id = $customer->LayDuLieu('*',"WHERE TenKH='$name_cus' AND SDT = '$phone_cus' AND DiaChi = '$adress_cus'");
 					$row_customer_id = mysqli_fetch_row($kq_customer_id);
@@ -75,23 +81,17 @@
 							$ser->Alert('Tạo khách hàng thất bại');
 							$this->Show();
 						}else{//Lấy id kh vừa tạo
-							$kq_cus = $customer->LayDuLieu('MaKH',"WHERE TenKH = '$name_cus' AND SDT ='$phone_cus'");
-							$row_cus = mysqli_fetch_row($kq_cus);
-							$cus_id = $row_cus[0];
+							$cus_id = $customer->LayMaKH();
 						}
 					}
+
+
 					//Tao hoa don	
-					$day = $ser->ToDay();
-					$cost_bill = $_POST['tongtien'];
-					$code_id = NULL;
 					if (isset($_POST['code_id'])) {
 						$code_id = $_POST['code_id'];
 					}
-					$staff_id = NULL;
 					if ($bill->TaoHoaDon($day,$cus_id,$staff_id,$code_id,$cost_bill)) {
-						$kq_bill = $bill->LayDuLieu(' MaHD',"hoadon WHERE hoadon.MaKH = '$cus_id'");
-						$row_bill = mysqli_fetch_row($kq_bill);
-						$bill_id = $row_bill[0];
+						$bill_id = $bill->LayMaHD();
 						foreach ($_SESSION['list_gear_cart'] as $key => $value) {
 							$gear_id = $value['gear_id'];
 							$sl = $value['sl'];
@@ -105,7 +105,7 @@
 					}else{
 						$ser->Alert('Tạo hóa đơn thất bại');
 					}
-			$this->Show();	
+					$this->Show();	
 				}else{
 					$ser->Alert('Bạn chưa có phụ kiện nào trong giỏ hàng');
 					$this->Show();
@@ -125,6 +125,66 @@
 					}
 					$this->Show();
 				}
+		}
+		function VN_Pay(){
+			$ser= new Method();
+			if (isset($_GET['vnp_ResponseCode']) && $_GET['vnp_ResponseCode']==00) {
+				echo $_GET['vnp_ResponseCode'];
+				
+				$customer = $this->Model('Model_Customer');
+				$bill = $this->Model('Model_Bill');
+				
+				if (isset($_COOKIE['info_cus'])) {
+					$info_cus_cookie = unserialize($_COOKIE['info_cus']);
+
+					//danh sach bien
+					$name = $info_cus_cookie['name'];
+					$phone = $info_cus_cookie['phone'];
+					$adr = $info_cus_cookie['adr']; // dia chi
+					$cost_bill = $info_cus_cookie['cost']; // tong tien
+					$email = "";
+					$acc = $_SESSION['user']['id']; //ma tai khoan
+					$code_id = NULL; // ma khuyen mai
+					$staff_id = NULL;// ma nhan vien
+					$day = $ser->ToDay();
+					$link = link;
+
+
+					//kiem tra khach hang va them kh moi 
+					$makh = $customer->KiemTraTTKH($name, $phone, $adr);
+					if ($makh) {
+						$id_cus = $makh;
+					}else{
+						if (!$customer->ThemKhachHang($name,$phone,$adr,$email,$acc)) {
+							$ser->Alert('Tạo khách hàng thất bại');
+							$this->Show();
+						}else{
+							$id_cus = $customer->LayMaKH();
+						}
+					}
+
+
+					//Tao hoa don
+					if ($bill->TaoHoaDon($day,$id_cus,$staff_id,$code_id,$cost_bill)) {
+						$bill_id = $bill->LayMaHD();
+						// Tao chi tiet hoa don
+						foreach ($_SESSION['list_gear_cart'] as $key => $value) {
+							$gear_id = $value['gear_id'];
+							$sl = $value['sl'];
+							$price = $value['bill'];
+							$bill->TaoCTHoaDOn($bill_id,$gear_id,$sl,$price);
+							unset($_SESSION['list_gear_cart'][$key]);
+						}
+						unset($_SESSION['promo_code']);
+						$ser->Alert_Choice("Thanh toán hóa đơn thành công","http://localhost/$link/Home/","http://localhost/$link/Home/");
+					} else {
+						$ser->Alert('Tạo hóa đơn thất bại');
+					}
+					
+
+				}
+			}
+
 		}
 	}
 ?>

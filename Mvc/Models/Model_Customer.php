@@ -11,5 +11,15 @@
 			}
 			return true;
 		}
+		function KiemTraTTKH($name, $phone, $adr){
+			$sql = $this->LayDuLieu('*',"WHERE TenKH='$name' AND SDT = '$phone' AND DiaChi = '$adr'");
+			$kq = mysqli_fetch_row($sql);
+			if (mysqli_num_rows($sql)>0) {
+				return $kq[0];
+			}
+		}
+		function LayMaKH(){
+			return mysqli_insert_id($this->con);
+		}
 	}
 ?>

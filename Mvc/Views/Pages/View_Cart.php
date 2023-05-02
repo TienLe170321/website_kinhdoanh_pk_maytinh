@@ -22,8 +22,7 @@
 						//echo $_SESSION['list_gear_cart'][0]['sl'];
 						if (isset($_SESSION['list_gear_cart'])) {
 							$list_gear = $_SESSION['list_gear_cart'] ;
-							$i = 1;
-							
+							$i = 1;						
 							foreach ($list_gear as $key => $value) {
 					?>
 					<tr>
@@ -47,6 +46,16 @@
 						//unset($_SESSION['promo_code']);
 						//print_r($_SESSION['list_gear_cart']);
 						// echo $_SESSION['list_gear_cart'][0]['bill'];
+						// if (isset($_COOKIE['info_cus'])) {
+						//     $info_cus_cookie = unserialize($_COOKIE['info_cus']);
+						//     echo $info_cus_cookie['name'];
+						//     echo $info_cus_cookie['phone'];
+						//     echo $info_cus_cookie['adr'];
+						//     echo $info_cus_cookie['cost'];
+						//     echo "tim thay user";
+						// }
+						
+						
 					?>
 					
 				</table>
@@ -70,6 +79,8 @@
 				<input type="hidden" name="tongtien" value="<?php echo $bill ?>">
 				<button type="submit" name="submit-bill" class="btn btn-primary m-2 w-100 ">Đặt hàng</button>
 			</form>
+			</form>
+			<a href="http://localhost/<?php echo link;?>/vnpayphp/index.php?bill=<?php echo $bill ?>">Thanh toán VNPay</a>
 			<form action="http://localhost/<?php echo link;?>/Cart/Bill_Code/" method="post">
 				<p class="text-center">MÃ KHUYẾN MÃI</p>
 				<input class="form-control m-2" type="text" name="code" placeholder="Mã khuyến mãi" pattern="^[\w]{6,10}$" title="Mã khuyến mãi từ 6 đến 10 ký tự và không chứa ký tự đặc biệt" required >
@@ -77,6 +88,4 @@
 			</form>
 		</div>
 	</div>
-	
-
 </div>

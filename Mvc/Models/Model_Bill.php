@@ -33,5 +33,8 @@
 			}
 			return true;
 		}
+		function LayMaHD(){
+			return mysqli_insert_id($this->con);
+		}
 	}
 ?>
