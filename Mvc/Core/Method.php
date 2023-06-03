@@ -34,5 +34,15 @@
 			$min_year = $min_year.'-'.$date['mon'].'-'.$date['mday'];
 			return $min_year;
 		}
+
+		public function Check_Login()
+		{
+			if (!isset($_SESSION['user'])) {
+				$this->Alert_Choice('vui lòng đăng nhập để tiếp tục','../../Login','../../Home');
+			}else{
+				return true;
+			}
+		}
+
 	}
 ?>

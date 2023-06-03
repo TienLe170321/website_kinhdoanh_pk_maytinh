@@ -17,8 +17,8 @@
       <input class="form-control rounded-0" type="text" placeholder="Tìm phụ kiện" name="gear" required>
       <button name="bt-search-gear1" class="btn btn-primary rounded-0">Tìm</button>
     </form>
-    <li class="nav-item">
-      <a class="nav-link" href="http://localhost/<?php echo link;?>/Cart/Add_Gear/">Giỏ hàng</a>
-    </li>
+      <li class="nav-item">
+        <a class="nav-link" href="http://localhost/<?php echo link;?>/Cart/Add_Gear/">Giỏ hàng</a>
+      </li>
   </ul>
 </div>

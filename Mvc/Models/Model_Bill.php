@@ -36,5 +36,9 @@
 		function LayMaHD(){
 			return mysqli_insert_id($this->con);
 		}
+		public function HoaDon_TK($id){
+			$sql = "SELECT hoadon.MaHD, hoadon.NgayLap, hoadon.GiaHD, hoadon.TrangThai, khachhang.DiaChi FROM hoadon, khachhang WHERE khachhang.MaKH = hoadon.MaKH AND khachhang.MaTK = '$id'";
+			return mysqli_query($this->con, $sql);
+		}
 	}
 ?>

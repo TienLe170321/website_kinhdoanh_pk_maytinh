@@ -180,11 +180,9 @@
 					} else {
 						$ser->Alert('Tạo hóa đơn thất bại');
 					}
-					
-
 				}
 			}
-
 		}
+		
 	}
 ?>

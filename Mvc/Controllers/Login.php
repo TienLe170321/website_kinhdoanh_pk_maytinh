@@ -16,8 +16,9 @@
 				}else{
 					$link = link;
 					if ($kq[3] == 'A'|| $kq[3]=='S') {
-						$_SESSION['admin'][0] = $taikhoan;
-						$_SESSION['admin'][1] = $kq[4];
+						$_SESSION['admin'][0] = $taikhoan; // ten tk
+						$_SESSION['admin'][1] = $kq[4]; // ten admin 
+						$_SESSION['admin'][2] = $kq[0]; //ma tk
 						header("Location:http://localhost/$link/Admin/");
 					}else{
 						$_SESSION['user']['tk'] = $taikhoan;

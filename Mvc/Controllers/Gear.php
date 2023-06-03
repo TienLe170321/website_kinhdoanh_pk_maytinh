@@ -116,9 +116,22 @@
 		function Gear_Detail($id){
 			$gear = $this->Model('Model_Gear');
 			$cate = $this->Model('Model_Category');
+			$cmt = $this->Model('Model_Cmt');
+			$loaibl = 'binhluan.MaPK';
+
+			$dsbl = $cmt->Lay_BL($loaibl,$id);
+
+			// while ($row_cmt = mysqli_fetch_row($dsbl)) {
+			// 	echo $row_cmt[0];
+			// 	echo $row_cmt[1];
+			// 	echo $row_cmt[2];
+			// 	echo $row_cmt[3];
+			// 	echo '<br>';
+			// }
 			$list_cate = $cate->LayDuLieu('*',"WHERE TrangThai = 'A'");
 			$gear_id = $gear->LayDuLieu('phukien.MaPK, phukien.TenPK, phukien.Gia, phukien.HinhAnh, phukien.ThongSoKT, loaiphukien.TenLoaiPK, thuonghieu.TenThuongHieu',"phukien, loaiphukien, thuonghieu WHERE phukien.TrangThai ='A' AND phukien.MaLoaiPK = loaiphukien.MaLoaiPK AND phukien.MaThuongHieu = thuonghieu.MaThuongHieu AND phukien.MaPK='$id'");
-			$this->View('Gear_Detail',['Page'=>'View_Gear_Detail','cate'=>$list_cate,'ctsp'=>$gear_id]);
+
+			$this->View('Gear_Detail',['Page'=>'View_Gear_Detail','cate'=>$list_cate,'ctsp'=>$gear_id,'cmt'=>$dsbl, 'id'=>$id,'key'=>'ma_pk']);
 		}
 	}
 ?>

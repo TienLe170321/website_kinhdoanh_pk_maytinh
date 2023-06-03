@@ -11,8 +11,13 @@
 
 		function Detail_New($id){
 			$post = $this->Model('Model_Post');
+			$cmt = $this->Model('Model_Cmt');
+			$loaibl = 'binhluan.MaTinTuc';
+
+			$dsbl = $cmt->Lay_BL($loaibl,$id);
 			$kq = $post->LayDuLieu('*',"tintuc WHERE TrangThai = 'A' AND MaTinTuc = '$id'");
-			$this->View('News',['Page'=>'View_Detail_New','news'=>$kq]);
+
+			$this->View('News',['Page'=>'View_Detail_New','news'=>$kq,'cmt'=>$dsbl, 'id'=>$id, 'key'=>'ma_tt']);
 		}
 	}
 ?>

@@ -5,7 +5,7 @@
         <button class="btn btn-primary rounded-0" type="button " name="bt-search-bill">Tìm</button>
     </form>
 </div>
-<div class="content p-2 bg-light">
+<div class="content p-2 bg-light" >
     <table class="table table-hover table-bordered mt-3 bg-white ">
         <thead>
         <tr class="bg-dark text-white">

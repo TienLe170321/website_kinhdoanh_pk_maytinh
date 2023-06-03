@@ -13,7 +13,7 @@
 		$mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
 		$mail->SMTPAuth   = true;                                   //Enable SMTP authentication
 		$mail->Username   = 'lvtien01vvk@gmail.com';                     //SMTP username
-		$mail->Password   = 'uriwsysnddbrswjc';                               //SMTP password
+		$mail->Password   = 'xqyftxnblsphluft';                               //SMTP password
 		$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
 		$mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 		//Recipients
@@ -26,7 +26,7 @@
 		$mail->send();
 		$ser->Alert('Gửi mail thành công.');
 		} catch (Exception $e) {
-			//echo "Gửi mail thất bại. Mailer Error: {$mail->ErrorInfo}";
+			echo "Gửi mail thất bại. Mailer Error: {$mail->ErrorInfo}";
 			$ser->Alert('Gửi mail thất bại');
 		}
 	}

@@ -8,16 +8,16 @@
 	<link rel="stylesheet" type="text/css" href="http://localhost/<?php echo link ?>/Public/css/Admin.css">
 	<title></title>
 </head>
-<body style="background-image: url('http://localhost/<?php echo link ?>/Public/Image/White_Black.jpeg')">
+<body>
 	<div class="container-fluid  ">
 		<div class="row ">
 			<?php require_once "./Mvc/Views/Blocks/Admin_Top.php"; ?>
 		</div>
-		<div class="row p-1 ">
-			<div class="col-lg-3">
+		<div class="row">
+			<div class="col-lg-2 p-0 bg-light">
 				<?php require_once "./Mvc/Views/Blocks/Admin_Menu.php"; ?>
 			</div>
-			<div class="col-lg-9 ">
+			<div class="col-lg-10 p-0 ">
 				<?php require_once "./Mvc/Views/Pages/".$data["Page"].".php"; ?>
 			</div>
 		</div>

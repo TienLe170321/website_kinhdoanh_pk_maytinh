@@ -9,13 +9,15 @@
 	<title></title>
 </head>
 <body>
-	<?php
-		require_once "./Mvc/Views/Blocks/Head.php";
-		require_once "./Mvc/Views/Blocks/Menu.php";
-	?>
-	<?php require_once "./Mvc/Views/Pages/".$data["Page"].".php"; ?>
-	<?php
-		require_once "./Mvc/Views/Blocks/Footer.php";
-	?>
+	<div class="container-fluid">
+		<?php
+			require_once "./Mvc/Views/Blocks/Head.php";
+			require_once "./Mvc/Views/Blocks/Menu.php";
+			require_once "./Mvc/Views/Pages/".$data["Page"].".php";
+			require_once "./Mvc/Views/Blocks/Cmt.php";
+			require_once "./Mvc/Views/Blocks/Footer.php";
+		?>
+	</div>
+	
 </body>
 </html>

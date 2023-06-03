@@ -20,14 +20,21 @@
 		</li>
 		
 	</ul>
+
 	<ul class="col nav d-flex justify-content-end">
 		<?php if (isset($_SESSION['user']['id'])) { ?>
-			<li class="nav-item ">
-			   <a class="nav-link text-white" href="http://localhost/<?php echo link;?>/Logout/Show/u">Đăng xuất</a>
-			</li>
+			 <li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" href="#">Tài khoản</a>
+		        <ul class="dropdown-menu">
+		          <li><a class="dropdown-item" href="http://localhost/TMDT/Accout/User_Info/<?php echo$_SESSION['user']['id']; ?>">Thông tin tài khoản</a></li>
+		          <li><a class="dropdown-item" href="http://localhost/TMDT/Accout/Acc_Bill/<?php echo$_SESSION['user']['id']; ?>">Trạng thái đơn hàng</a></li>
+		          <li><a class="dropdown-item" href="http://localhost/TMDT/Logout/Show/u">Đăng xuất</a></li>
+		        </ul>
+		      </li>
+			
 		<?php }else{ ?>
 			<li class="nav-item ">
-			   <a class="nav-link text-white" href="http://localhost/<?php echo link;?>/Login/">Đăng nhập</a>
+			   <a class="nav-link text-white" href="http://localhost/TMDT/Login/">Đăng nhập</a>
 			</li>
 		<?php } ?>
 		

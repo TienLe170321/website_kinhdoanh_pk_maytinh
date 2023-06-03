@@ -2,6 +2,7 @@
 	class Model_Account extends Database{
 		function LayDuLieu($select,$where){
 			$sql = "SELECT $select FROM taikhoan $where;" ;
+			//echo $sql;
 			return mysqli_query($this->con, $sql);
 		}
 
@@ -23,6 +24,22 @@
 
 		function CapNhatTaiKhoan($User,$Name,$Per){
 			$sql = "UPDATE taikhoan SET Quyen = '$Per',Hoten='$Name' WHERE TaiKhoan = '$User'" ;
+			if(!mysqli_query($this->con, $sql)){
+				return false;
+			}
+			return true;
+		}
+
+		public function Matkhau($id){
+			$sql = "SELECT TaiKhoan.MatKhau FROM TaiKhoan WHERE TrangThai = 'A' AND TaiKhoan.MaTaiKhoan = '$id'" ;
+			$kq =  mysqli_query($this->con, $sql);
+			$row = mysqli_fetch_row($kq);
+			return $pass = $row[0];
+		}
+
+		public function DoiMatKhau($id, $new_pass)
+		{
+			$sql = "UPDATE taikhoan SET MatKhau = '$new_pass' WHERE taikhoan.MaTaiKhoan = '$id'";
 			if(!mysqli_query($this->con, $sql)){
 				return false;
 			}

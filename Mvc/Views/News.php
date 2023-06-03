@@ -11,9 +11,7 @@
 <body>
 	<?php
 		require_once "./Mvc/Views/Blocks/Head.php";
-	?>
-	<?php require_once "./Mvc/Views/Pages/".$data["Page"].".php"; ?>
-	<?php
+	 	require_once "./Mvc/Views/Pages/".$data["Page"].".php"; 
 		require_once "./Mvc/Views/Blocks/Footer.php";
 	?>
 </body>

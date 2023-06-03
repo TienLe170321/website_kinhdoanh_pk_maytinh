@@ -1,4 +1,4 @@
-<div class="container-fuid p-2 w-75 mx-auto containerr">
+<div class="container-fuid p-2  containerr">
 	<?php 
 		$row_news = mysqli_fetch_row($data['news']);
 	?>
@@ -9,3 +9,6 @@
 		<p class="m-2 p-2"><?php echo $row_news[2] ?></p>
 	</div>
 </div>
+<?php
+require_once "./Mvc/Views/Blocks/Cmt.php";
+?>
